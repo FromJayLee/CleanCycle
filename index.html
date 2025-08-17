@@ -879,10 +879,11 @@
                 try {
                     // 프리플라이트 회피를 위해 Content-Type을 text/plain 사용
                     const res = await fetch(WAITLIST_ENDPOINT, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(payload)
-                    });
+  method: 'POST',
+  headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // simple 요청 유지
+  body: JSON.stringify(payload),
+  mode: 'no-cors' // 배포 후에도 고정
+});
 
                     // 응답 파싱 시도(읽기 실패해도 사용자 경험상 OK 처리)
                     let okResp = true;
@@ -932,5 +933,6 @@
         });
     </script>
 </body>
+
 
 </html>
