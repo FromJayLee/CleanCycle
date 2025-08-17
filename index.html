@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CleanCycle - 똑똑한 집안일 관리</title>
   <style>
+    /* 히어로 타이틀/부제 줄바꿈 보강 */
+.hero h1,
+.hero-subtitle{
+  word-break: keep-all;       /* 한국어 단어 중간 분리 방지 */
+  overflow-wrap: anywhere;    /* 화면 너비에 맞춰 강제 줄바꿈 */
+}
+.hero-subtitle span{ white-space: normal !important; } /* 기존 nowrap 무력화 */
+
     * { margin:0; padding:0; box-sizing:border-box; }
 
     :root{
@@ -241,9 +249,10 @@
     <div class="container">
       <h1>집안일을 똑똑하게 관리하세요</h1>
       <p class="hero-subtitle">
-        <span style="white-space: nowrap;">청소, 세탁, 필터 교체까지. 언제 무엇을 해야 할지 더 이상 기억하지 마세요.</span><br>
-        CleanCycle이 알아서 알려드립니다.
-      </p>
+  청소, 세탁, 필터 교체까지. 언제 무엇을 해야 할지 더 이상 기억하지 마세요.<br>
+  CleanCycle이 알아서 알려드립니다.
+</p>
+
 
       <div class="hero-cta">
         <a href="#signup" class="btn-primary" data-scroll-signup="true">무료로 시작하기</a>
@@ -550,4 +559,5 @@
   </script>
 </body>
 </html>
+
 
