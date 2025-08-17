@@ -13,10 +13,15 @@
       --safe-top: env(safe-area-inset-top, 0px);
     }
 
-    body{
-      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height:1.6; color:#333; background:#ffffff;
-    }
+    body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #ffffff;
+  max-width: 100%;
+  overflow-x: hidden;   /* fallback */
+  overflow-x: clip;     /* 지원 브라우저에서 가로 스크롤 완전 차단 */
+}
 
     .container{ max-width:1200px; margin:0 auto; padding:0 20px; }
 
@@ -94,10 +99,13 @@
     /* Benefits */
     .benefits{ background:#f8f9fa; padding:80px 0; }
     .section-title{ text-align:center; font-size:2.5rem; margin-bottom:3rem; color:#333; }
-    .benefits-grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-      gap:2rem; margin-top:3rem;
-    }
+    .benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
     .benefit-card{
       background:#fff; padding:2rem; border-radius:15px; box-shadow:0 5px 20px rgba(0,0,0,.1);
       text-align:center; transition:transform .3s; opacity:0; transform:translateY(30px);
@@ -119,16 +127,24 @@
 
     /* Pricing */
     .pricing{ background:#f8f9fa; padding:80px 0; }
-    .pricing-grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-      gap:2rem; margin-top:3rem; max-width:1000px; margin-left:auto; margin-right:auto;
-    }
+    .pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
     .pricing-card{
       background:#fff; border-radius:15px; padding:2rem; text-align:center; box-shadow:0 5px 20px rgba(0,0,0,.1);
       position:relative; transition:transform .3s; opacity:0; transform:translateY(30px); transition:opacity .6s ease, transform .6s ease;
     }
     .pricing-card:hover{ transform:translateY(-5px); }
-    .pricing-card.featured{ border:3px solid #667eea; transform:scale(1.05); }
+    .pricing-card.featured {
+  border: 3px solid #667eea;
+  transform: none;
+}
     .pricing-card.featured::before{
       content:"유료"; position:absolute; top:-15px; left:50%; transform:translateX(-50%);
       background:#667eea; color:#fff; padding:5px 20px; border-radius:15px; font-size:.9rem; font-weight:bold;
@@ -534,3 +550,4 @@
   </script>
 </body>
 </html>
+
