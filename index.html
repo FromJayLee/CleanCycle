@@ -1,942 +1,398 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CleanCycle - 똑똑한 집안일 관리</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #ffffff
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1)
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #667eea
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s
-        }
-
-        .nav-links a:hover {
-            color: #667eea
-        }
-
-        .cta-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            display: inline-block
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3)
-        }
-
-        /* Hero */
-        .hero {
-            padding: 120px 0 80px;
-            text-align: center;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: url('image.jpg') center/cover no-repeat;
-            position: relative
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1
-        }
-
-        .hero .container {
-            position: relative;
-            z-index: 2
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3)
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 1rem
-        }
-
-        .btn-primary {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s
-        }
-
-        .btn-primary:hover,
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2)
-        }
-
-        .hero-demo {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 600px;
-            border: 1px solid rgba(255, 255, 255, 0.2)
-        }
-
-        /* Partners */
-        .partners {
-            background: white;
-            padding: 60px 0;
-            text-align: center
-        }
-
-        .partners h3 {
-            color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem
-        }
-
-        .partner-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            opacity: 0.6
-        }
-
-        .partner-logo {
-            width: 60px;
-            height: 60px;
-            background: #f0f0f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #999
-        }
-
-        /* Benefits */
-        .benefits {
-            background: #f8f9fa;
-            padding: 80px 0
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem
-        }
-
-        .benefit-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px)
-        }
-
-        .benefit-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: white;
-            font-size: 1.5rem
-        }
-
-        /* How */
-        .how-it-works {
-            padding: 80px 0;
-            background: white
-        }
-
-        .steps-grid {
-            display: flex;
-            justify-content: space-around;
-            gap: 2rem;
-            margin-top: 3rem;
-            flex-wrap: wrap
-        }
-
-        .step-card {
-            text-align: center;
-            padding: 2rem
-        }
-
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: #667eea;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-weight: bold;
-            font-size: 1.2rem
-        }
-
-        /* Pricing */
-        .pricing {
-            background: #f8f9fa;
-            padding: 80px 0
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto
-        }
-
-        .pricing-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: transform 0.3s
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px)
-        }
-
-        .pricing-card.featured {
-            border: 3px solid #667eea;
-            transform: scale(1.05)
-        }
-
-        .pricing-card.featured::before {
-            content: "유료";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #667eea;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: bold
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin: 1rem 0
-        }
-
-        .price-period {
-            color: #666;
-            font-size: 1rem
-        }
-
-        .feature-list {
-            list-style: none;
-            margin: 2rem 0;
-            text-align: left
-        }
-
-        .feature-list li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 1.5rem
-        }
-
-        .feature-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold
-        }
-
-        /* Testimonials - (reserved) */
-
-        /* FAQ */
-        .faq {
-            background: #f8f9fa;
-            padding: 80px 0
-        }
-
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-            margin-top: 3rem
-        }
-
-        .faq-item {
-            background: white;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            background: white;
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center
-        }
-
-        .faq-question:hover {
-            background: #f8f9fa
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            color: #666;
-            display: none
-        }
-
-        .faq-item.active .faq-answer {
-            display: block
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            opacity: 0.9
-        }
-
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            padding: 40px 0
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            color: #667eea
-        }
-
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem
-        }
-
-        .footer-section a:hover {
-            color: white
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #555;
-            color: #999
-        }
-
-        /* Signup forms */
-        .signup-copy {
-            margin: 0.25rem auto 0.75rem;
-            opacity: 0.9
-        }
-
-        .signup-form {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 0.25rem auto 1.25rem
-        }
-
-        .signup-form input[type="email"] {
-            padding: 12px 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            min-width: 240px;
-            max-width: 360px;
-            outline: none
-        }
-
-        .signup-form button {
-            padding: 12px 20px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer
-        }
-
-        .signup-form--hero input[type="email"] {
-            background: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.6)
-        }
-
-        .signup-form--hero button {
-            background: #fff;
-            color: #667eea;
-            font-weight: bold
-        }
-
-        .signup-form--cta input[type="email"] {
-            background: #fff
-        }
-
-        .signup-form--cta button {
-            background: #fff;
-            color: #667eea;
-            font-weight: bold
-        }
-
-        .signup-feedback {
-            width: 100%;
-            text-align: center;
-            font-size: 0.95rem;
-            margin-top: 0.25rem
-        }
-
-        .visually-hidden {
-            position: absolute !important;
-            clip: rect(1px, 1px, 1px, 1px);
-            clip-path: inset(50%);
-            height: 1px;
-            width: 1px;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 0;
-            border: 0
-        }
-
-        /* Fixed header anchor offset */
-        #features,
-        #how-it-works,
-        #pricing,
-        #faq,
-        #cta,
-        #signup {
-            scroll-margin-top: 90px
-        }
-
-        /* Responsive */
-        @media (max-width:768px) {
-            .nav-links {
-                display: none
-            }
-
-            .hero h1 {
-                font-size: 2.5rem
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: center
-            }
-
-            .section-title {
-                font-size: 2rem
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CleanCycle - 똑똑한 집안일 관리</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;line-height:1.6;color:#333;background:#ffffff}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Header */
+    header{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.1)}
+    nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
+    .logo{font-size:1.8rem;font-weight:bold;color:#667eea}
+    .nav-links{display:flex;list-style:none;gap:2rem}
+    .nav-links a{text-decoration:none;color:#333;font-weight:500;transition:color 0.3s}
+    .nav-links a:hover{color:#667eea}
+    .cta-btn{background:linear-gradient(45deg,#667eea,#764ba2);color:white;padding:12px 24px;border:none;border-radius:25px;font-weight:bold;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;display:inline-block}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(102,126,234,0.3)}
+
+    /* Hero */
+    .hero{padding:120px 0 80px;text-align:center;color:white;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:url('image.jpg') center/cover no-repeat;position:relative}
+    .hero::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:1}
+    .hero .container{position:relative;z-index:2}
+    .hero h1{font-size:3.5rem;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
+    .hero-subtitle{font-size:1.3rem;margin-bottom:1rem;opacity:0.9;max-width:680px;margin-left:auto;margin-right:auto}
+    .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+    .btn-primary{background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);color:white;border:2px solid rgba(255,255,255,0.3);padding:15px 30px;border-radius:30px;font-size:1.1rem;font-weight:bold;text-decoration:none;transition:all 0.3s}
+    .btn-secondary{background:white;color:#667eea;border:2px solid white;padding:15px 30px;border-radius:30px;font-size:1.1rem;font-weight:bold;text-decoration:none;transition:all 0.3s}
+    .btn-primary:hover,.btn-secondary:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(0,0,0,0.2)}
+
+    /* Partners */
+    .partners{background:white;padding:60px 0;text-align:center}
+    .partners h3{color:#666;margin-bottom:2rem;font-size:1.1rem}
+    .partner-logos{display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;opacity:0.6}
+    .partner-logo{width:60px;height:60px;background:#f0f0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#999}
+
+    /* Benefits */
+    .benefits{background:#f8f9fa;padding:80px 0}
+    .section-title{text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#333}
+    .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem}
+    .benefit-card{background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1);text-align:center;transition:transform 0.3s}
+    .benefit-card:hover{transform:translateY(-5px)}
+    .benefit-icon{width:60px;height:60px;background:linear-gradient(45deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:white;font-size:1.5rem}
+
+    /* How */
+    .how-it-works{padding:80px 0;background:white}
+    .steps-grid{display:flex;justify-content:space-around;gap:2rem;margin-top:3rem;flex-wrap:wrap}
+    .step-card{text-align:center;padding:2rem}
+    .step-number{width:50px;height:50px;background:#667eea;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-weight:bold;font-size:1.2rem}
+
+    /* Pricing */
+    .pricing{background:#f8f9fa;padding:80px 0}
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem;max-width:1000px;margin-left:auto;margin-right:auto}
+    .pricing-card{background:white;border-radius:15px;padding:2rem;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,0.1);position:relative;transition:transform 0.3s}
+    .pricing-card:hover{transform:translateY(-5px)}
+    .pricing-card.featured{border:3px solid #667eea;transform:scale(1.05)}
+    .pricing-card.featured::before{content:"유료";position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#667eea;color:white;padding:5px 20px;border-radius:15px;font-size:0.9rem;font-weight:bold}
+    .price{font-size:2.5rem;font-weight:bold;color:#667eea;margin:1rem 0}
+    .price-period{color:#666;font-size:1rem}
+    .feature-list{list-style:none;margin:2rem 0;text-align:left}
+    .feature-list li{padding:0.5rem 0;position:relative;padding-left:1.5rem}
+    .feature-list li::before{content:"✓";position:absolute;left:0;color:#667eea;font-weight:bold}
+
+    /* FAQ */
+    .faq{background:#f8f9fa;padding:80px 0}
+    .faq-list{max-width:800px;margin:0 auto;margin-top:3rem}
+    .faq-item{background:white;margin-bottom:1rem;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+    .faq-question{padding:1.5rem;background:white;border:none;width:100%;text-align:left;font-size:1.1rem;font-weight:bold;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-question:hover{background:#f8f9fa}
+    .faq-answer{padding:0 1.5rem 1.5rem;color:#666;display:none}
+    .faq-item.active .faq-answer{display:block}
+
+    /* CTA Section */
+    .cta-section{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:80px 0;text-align:center}
+    .cta-section h2{font-size:2.5rem;margin-bottom:1rem}
+    .cta-section p{font-size:1.2rem;margin-bottom:1rem;opacity:0.9}
+
+    /* Footer */
+    footer{background:#333;color:white;padding:40px 0}
+    .footer-bottom{text-align:center;margin-top:2rem;padding-top:2rem;border-top:1px solid #555;color:#999}
+
+    /* Signup forms */
+    .signup-copy{margin:0.25rem auto 0.75rem;opacity:0.9}
+    .signup-form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin:0.25rem auto 1.25rem}
+    .signup-form input[type="email"]{padding:12px 14px;border:1px solid #ddd;border-radius:10px;min-width:240px;max-width:360px;outline:none}
+    .signup-form button{padding:12px 20px;border-radius:10px;border:none;cursor:pointer}
+    .signup-form--hero input[type="email"]{background:#fff;border:1px solid rgba(255,255,255,0.6)}
+    .signup-form--hero button{background:#fff;color:#667eea;font-weight:bold}
+    .signup-form--cta input[type="email"]{background:#fff}
+    .signup-form--cta button{background:#fff;color:#667eea;font-weight:bold}
+    .signup-feedback{width:100%;text-align:center;font-size:0.95rem;margin-top:0.25rem}
+    .visually-hidden{position:absolute !important;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap;padding:0;border:0}
+
+    /* Fixed header anchor offset */
+    #features,#how-it-works,#pricing,#faq,#cta,#signup{scroll-margin-top:90px}
+
+    @media (max-width:768px){
+      .nav-links{display:none}
+      .hero h1{font-size:2.5rem}
+      .hero-cta{flex-direction:column;align-items:center}
+      .section-title{font-size:2rem}
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">CleanCycle</div>
-            <ul class="nav-links">
-                <li><a href="#features">기능</a></li>
-                <li><a href="#how-it-works">사용법</a></li>
-                <li><a href="#pricing">요금제</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
-            <!-- 헤더 CTA도 상단 입력창으로 이동 -->
-            <a href="#signup" class="cta-btn" data-scroll-signup="true">무료 체험</a>
-        </nav>
-    </header>
+  <!-- Header -->
+  <header>
+    <nav class="container">
+      <div class="logo">CleanCycle</div>
+      <ul class="nav-links">
+        <li><a href="#features">기능</a></li>
+        <li><a href="#how-it-works">사용법</a></li>
+        <li><a href="#pricing">요금제</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#signup" class="cta-btn" data-scroll-signup="true">무료 체험</a>
+    </nav>
+  </header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <h1>집안일을 똑똑하게 관리하세요</h1>
-            <p class="hero-subtitle">
-                <span style="white-space: nowrap;">청소, 세탁, 필터 교체까지. 언제 무엇을 해야 할지 더 이상 기억하지 마세요.</span><br>
-                CleanCycle이 알아서 알려드립니다.
-            </p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>집안일을 똑똑하게 관리하세요</h1>
+      <p class="hero-subtitle">
+        <span style="white-space: nowrap;">청소, 세탁, 필터 교체까지. 언제 무엇을 해야 할지 더 이상 기억하지 마세요.</span><br>
+        CleanCycle이 알아서 알려드립니다.
+      </p>
 
+      <div class="hero-cta">
+        <a href="#signup" class="btn-primary" data-scroll-signup="true">무료로 시작하기</a>
+      </div>
 
-            <div class="hero-cta">
-                <!-- 버튼 클릭 시 상단 입력창으로 스크롤 -->
-                <a href="#signup" class="btn-primary" data-scroll-signup="true">무료로 시작하기</a>
-            </div>
+      <!-- 상단: 출시 알림 신청 -->
+      <p class="signup-copy">출시 알림을 가장 먼저 받아보세요.</p>
+      <form id="signup" class="signup-form signup-form--hero" action="#" method="post" novalidate>
+        <label for="signup-email" class="visually-hidden">이메일</label>
+        <input type="email" id="signup-email" name="email" placeholder="이메일 주소" required />
+        <button type="submit">알림 신청</button>
+        <div class="signup-feedback" id="signup-feedback" aria-live="polite" role="status"></div>
+      </form>
+    </div>
+  </section>
 
-            <!-- 상단: 출시 알림 신청 (맨 위 입력창) -->
-            <p class="signup-copy">출시 알림을 가장 먼저 받아보세요.</p>
-            <form id="signup" class="signup-form signup-form--hero" action="#" method="post" novalidate>
-                <label for="signup-email" class="visually-hidden">이메일</label>
-                <input type="email" id="signup-email" name="email" placeholder="이메일 주소" required />
-                <button type="submit">알림 신청</button>
-                <div class="signup-feedback" id="signup-feedback" aria-live="polite" role="status"></div>
-            </form>
+  <!-- Partners -->
+  <section class="partners">
+    <div class="container">
+      <h3>청소, 세탁 등의 집안일을 꼼꼼하게 관리하세요.</h3>
+      <div class="partner-logos">
+        <div class="partner-logo">👨‍👩‍👧‍👦</div>
+        <div class="partner-logo">🏠</div>
+        <div class="partner-logo">🧹</div>
+        <div class="partner-logo">⚡</div>
+        <div class="partner-logo">✨</div>
+        <div class="partner-logo">💡</div>
+        <div class="partner-logo">🎯</div>
+        <div class="partner-logo">📱</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="benefits" id="features">
+    <div class="container">
+      <h2 class="section-title">이런 문제를 해결해드려요</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card"><div class="benefit-icon">🧠</div><h3>기억 부담 제로</h3><p>언제 청소했는지, 언제 해야 하는지 더 이상 기억할 필요가 없습니다. 시스템이 모든 주기를 자동으로 계산해요.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">⚖️</div><h3>과하지도 늦지도 않게</h3><p>너무 자주 하지도, 너무 늦지도 않게 적절한 타이밍에 집안일을 관리할 수 있어요.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">👥</div><h3>가족 갈등 방지</h3><p>누가 언제 무엇을 했는지 투명하게 기록되어 가족간 역할 분담 갈등이 줄어들어요.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">💰</div><h3>소모품 비용 절약</h3><p>필터, 세제 등 소모품의 적절한 교체 시기를 놓치지 않아 불필요한 비용을 줄일 수 있어요.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">📊</div><h3>집안일 효율성</h3><p>공간별, 영역별로 체계적으로 관리하고 완료 이력을 한눈에 확인할 수 있어요.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">⏰</div><h3>시간 효율성</h3><p>오늘 꼭 해야 할 일만 보여주어 우선순위를 명확하게 정할 수 있어요.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">3단계로 간단하게 시작하세요</h2>
+      <div class="steps-grid">
+        <div class="step-card"><div class="step-number">1</div><h3>집안일 등록</h3><p>청소, 세탁, 필터 교체 등 관리하고 싶은 집안일과 주기를 등록하세요.</p></div>
+        <div class="step-card"><div class="step-number">2</div><h3>오늘 할 일 확인</h3><p>매일 앱을 열어 오늘 해야 할 일만 확인하고 실행하세요.</p></div>
+        <div class="step-card"><div class="step-number">3</div><h3>완료 체크</h3><p>일을 마치면 체크하기만 하면 다음 예정일이 자동으로 계산돼요.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2 class="section-title">합리적인 요금제</h2>
+      <p style="text-align:center;color:#666;margin-bottom:1rem;">유료플랜으로 더욱 세심하게 관리하세요.</p>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>베이직</h3>
+          <div class="price">무료<span class="price-period">/월</span></div>
+          <ul class="feature-list">
+            <li>집안일 항목 최대 10개</li>
+            <li>기본 주기 관리</li>
+            <li>오늘 할 일 알림</li>
+            <li>완료 기록</li>
+            <li>기본 필터링</li>
+          </ul>
+          <a href="#signup" class="cta-btn" data-scroll-signup="true">무료 시작</a>
         </div>
-    </section>
 
-    <!-- Partners -->
-    <section class="partners">
-        <div class="container">
-            <h3>청소, 세탁 등의 집안일을 꼼꼼하게 관리하세요.</h3>
-            <div class="partner-logos">
-                <div class="partner-logo">👨‍👩‍👧‍👦</div>
-                <div class="partner-logo">🏠</div>
-                <div class="partner-logo">🧹</div>
-                <div class="partner-logo">⚡</div>
-                <div class="partner-logo">✨</div>
-                <div class="partner-logo">💡</div>
-                <div class="partner-logo">🎯</div>
-                <div class="partner-logo">📱</div>
-            </div>
+        <div class="pricing-card featured">
+          <h3>프리미엄</h3>
+          <div class="price">₩4,900<span class="price-period">/월</span></div>
+          <ul class="feature-list">
+            <li>무제한 집안일 항목</li>
+            <li>가족 공유 (최대 4명)</li>
+            <li>주간/월간 리포트</li>
+            <li>소모품 재고 관리</li>
+            <li>사진 첨부 기능</li>
+            <li>캘린더 연동</li>
+            <li>우선순위 고객지원</li>
+          </ul>
+          <a href="#signup" class="cta-btn" data-scroll-signup="true">7일 무료체험</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Benefits -->
-    <section class="benefits" id="features">
-        <div class="container">
-            <h2 class="section-title">이런 문제를 해결해드려요</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">🧠</div>
-                    <h3>기억 부담 제로</h3>
-                    <p>언제 청소했는지, 언제 해야 하는지 더 이상 기억할 필요가 없습니다. 시스템이 모든 주기를 자동으로 계산해요.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚖️</div>
-                    <h3>과하지도 늦지도 않게</h3>
-                    <p>너무 자주 하지도, 너무 늦지도 않게 적절한 타이밍에 집안일을 관리할 수 있어요.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">👥</div>
-                    <h3>가족 갈등 방지</h3>
-                    <p>누가 언제 무엇을 했는지 투명하게 기록되어 가족간 역할 분담 갈등이 줄어들어요.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">💰</div>
-                    <h3>소모품 비용 절약</h3>
-                    <p>필터, 세제 등 소모품의 적절한 교체 시기를 놓치지 않아 불필요한 비용을 줄일 수 있어요.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">📊</div>
-                    <h3>집안일 효율성</h3>
-                    <p>공간별, 영역별로 체계적으로 관리하고 완료 이력을 한눈에 확인할 수 있어요.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">⏰</div>
-                    <h3>시간 효율성</h3>
-                    <p>오늘 꼭 해야 할 일만 보여주어 우선순위를 명확하게 정할 수 있어요.</p>
-                </div>
-            </div>
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            무료 플랜으로도 모든 기능을 사용할 수 있나요?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            프리미엄 요금제로 업그레이드 하시면 모든 기능을 제한 없이 사용하실 수 있습니다. 프리미엄 플랜은 언제든지 해지가 가능합니다.
+          </div>
         </div>
-    </section>
-
-    <!-- How it works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2 class="section-title">3단계로 간단하게 시작하세요</h2>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>집안일 등록</h3>
-                    <p>청소, 세탁, 필터 교체 등 관리하고 싶은 집안일과 주기를 등록하세요.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>오늘 할 일 확인</h3>
-                    <p>매일 앱을 열어 오늘 해야 할 일만 확인하고 실행하세요.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>완료 체크</h3>
-                    <p>일을 마치면 체크하기만 하면 다음 예정일이 자동으로 계산돼요.</p>
-                </div>
-            </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            가족과 함께 사용하려면 어떻게 해야 하나요?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            프리미엄 요금제에서 가족 구성원을 초대할 수 있습니다. 초대받은 가족은 동일한 집안일 목록을 공유하며, 누가 언제 무엇을 했는지 실시간으로 확인할 수 있습니다.
+          </div>
         </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 class="section-title">합리적인 요금제</h2>
-            <p style="text-align:center;color:#666;margin-bottom:1rem;">유료플랜으로 더욱 세심하게 관리하세요.</p>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>베이직</h3>
-                    <div class="price">무료<span class="price-period">/월</span></div>
-                    <ul class="feature-list">
-                        <li>집안일 항목 최대 10개</li>
-                        <li>기본 주기 관리</li>
-                        <li>오늘 할 일 알림</li>
-                        <li>완료 기록</li>
-                        <li>기본 필터링</li>
-                    </ul>
-                    <!-- 버튼 → 상단 입력창으로 이동 -->
-                    <a href="#signup" class="cta-btn" data-scroll-signup="true">무료 시작</a>
-                </div>
-
-                <div class="pricing-card featured">
-                    <h3>프리미엄</h3>
-                    <div class="price">₩4,900<span class="price-period">/월</span></div>
-                    <ul class="feature-list">
-                        <li>무제한 집안일 항목</li>
-                        <li>가족 공유 (최대 4명)</li>
-                        <li>주간/월간 리포트</li>
-                        <li>소모품 재고 관리</li>
-                        <li>사진 첨부 기능</li>
-                        <li>캘린더 연동</li>
-                        <li>우선순위 고객지원</li>
-                    </ul>
-                    <!-- 버튼 → 상단 입력창으로 이동 -->
-                    <a href="#signup" class="cta-btn" data-scroll-signup="true">구독하기</a>
-                </div>
-            </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            모바일에서도 사용할 수 있나요?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            네, 모바일 웹브라우저에서 최적화된 환경으로 이용 가능합니다.
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- FAQ -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2 class="section-title">자주 묻는 질문</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        무료 플랜으로도 모든 기능을 사용할 수 있나요?
-                        <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        프리미엄 요금제로 업그레이드 하시면 모든 기능을 제한 없이 사용하실 수 있습니다. 프리미엄 플랜은 언제든지 해지가 가능합니다.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        가족과 함께 사용하려면 어떻게 해야 하나요?
-                        <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        프리미엄 요금제에서 가족 구성원을 초대할 수 있습니다. 초대받은 가족은 동일한 집안일 목록을 공유하며, 누가 언제 무엇을 했는지 실시간으로 확인할 수 있습니다.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        모바일에서도 사용할 수 있나요?
-                        <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        네, 모바일 웹브라우저에서 최적화된 환경으로 이용 가능합니다.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- CTA Section -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <h2>더 이상 집안일로 고민하지 마세요</h2>
+      <p>CleanCycle과 함께 보다 간편하고 편리하게 관리하세요.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="#signup" class="btn-secondary" data-scroll-signup="true">무료로 시작하기</a>
+      </div>
 
-    <!-- CTA Section -->
-    <section class="cta-section" id="cta">
-        <div class="container">
-            <h2>더 이상 집안일로 고민하지 마세요</h2>
-            <p>CleanCycle과 함께 보다 간편하고 편리하게 관리하세요.</p>
-            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-                <!-- 버튼 → 상단 입력창으로 이동 -->
-                <a href="#signup" class="btn-secondary" data-scroll-signup="true">무료로 시작하기</a>
-            </div>
+      <!-- 하단: 버튼 아래 폼 -->
+      <p class="signup-copy">출시 알림을 가장 먼저 받아보세요.</p>
+      <form id="signup-cta" class="signup-form signup-form--cta" action="#" method="post" novalidate>
+        <label for="signup-email-cta" class="visually-hidden">이메일</label>
+        <input type="email" id="signup-email-cta" name="email" placeholder="이메일 주소" required />
+        <button type="submit">알림 신청</button>
+        <div class="signup-feedback" id="signup-feedback-cta" aria-live="polite" role="status"></div>
+      </form>
+    </div>
+  </section>
 
-            <!-- 하단: 버튼 바로 아래에 폼 + 문구 추가 -->
-            <p class="signup-copy">출시 알림을 가장 먼저 받아보세요.</p>
-            <form id="signup-cta" class="signup-form signup-form--cta" action="#" method="post" novalidate>
-                <label for="signup-email-cta" class="visually-hidden">이메일</label>
-                <input type="email" id="signup-email-cta" name="email" placeholder="이메일 주소" required />
-                <button type="submit">알림 신청</button>
-                <div class="signup-feedback" id="signup-feedback-cta" aria-live="polite" role="status"></div>
-            </form>
-        </div>
-    </section>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 CleanCycle. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2025 CleanCycle. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  <script>
+    /* ====== 대기자 엔드포인트 ====== */
+    const WAITLIST_DEPLOY_ID = 'AKfycbyLi-xNeiHC01IRrYCr9O5DS3IbsFCIkS7jLUabrC-QxjyPWuJWW06K2MOmqlFYt8zyFQ';
+    const WAITLIST_ENDPOINT  = `https://script.google.com/macros/s/${WAITLIST_DEPLOY_ID}/exec`;
 
-    <script>
-        // FAQ 토글
-       const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbws5qPLAMDtYUI0x_WlCNzINEkdBmdZ44dxmtTp1c0Jqv0sjcWyxDqmNX3l5ZTy2SMaXA/exec';
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
-                const isActive = faqItem.classList.contains('active');
+    /* ====== FAQ 토글 ====== */
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        const isActive = faqItem.classList.contains('active');
 
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                    const btn = item.querySelector('.faq-question');
-                    if (btn) {
-                        btn.setAttribute('aria-expanded', 'false');
-                        const s = btn.querySelector('span'); if (s) s.textContent = '+';
-                    }
-                });
-
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                    button.setAttribute('aria-expanded', 'true');
-                    const s = button.querySelector('span'); if (s) s.textContent = '-';
-                }
-            });
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+          const btn = item.querySelector('.faq-question');
+          if (btn) {
+            btn.setAttribute('aria-expanded', 'false');
+            const s = btn.querySelector('span'); if (s) s.textContent = '+';
+          }
         });
 
-        // 스무스 스크롤 (기존 앵커)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // 모든 CTA 버튼 → 상단 입력창(#signup)으로 이동
-        function scrollToTopSignup(e) {
-            e.preventDefault();
-            const topSignup = document.querySelector('#signup');
-            if (topSignup) topSignup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!isActive) {
+          faqItem.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+          const s = button.querySelector('span'); if (s) s.textContent = '-';
         }
-        document.querySelectorAll('[data-scroll-signup="true"]').forEach(el => {
-            el.addEventListener('click', scrollToTopSignup);
-        });
+      });
+    });
 
-        // 간단한 대기자 등록 처리 (로컬 저장 + 피드백)
-        function handleSignup(formId, inputId, feedbackId, sourceLabel) {
-            const form = document.getElementById(formId);
-            const input = document.getElementById(inputId);
-            const feedback = document.getElementById(feedbackId);
+    /* ====== 모든 CTA → 상단 입력창으로 스크롤 ====== */
+    function scrollToTopSignup(e){
+      e.preventDefault();
+      const topSignup = document.querySelector('#signup');
+      if (topSignup) topSignup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    document.querySelectorAll('[data-scroll-signup="true"]').forEach(el => {
+      el.addEventListener('click', scrollToTopSignup);
+    });
 
-            if (!form || !input) return;
+    /* ====== 대기자 등록 (x-www-form-urlencoded + no-cors) ====== */
+    function handleSignup(formId, inputId, feedbackId, sourceLabel){
+      const form = document.getElementById(formId);
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById(feedbackId);
+      if (!form || !input) return;
 
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = (input.value || '').trim();
-                const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-                if (!ok) {
-                    if (feedback) feedback.textContent = '올바른 이메일 주소를 입력해 주세요.';
-                    input.focus();
-                    return;
-                }
-
-                const payload = {
-                    email,
-                    source: sourceLabel || 'web',
-                    ua: navigator.userAgent || '',
-                    page: location.href
-                };
-
-                try {
-                    // 프리플라이트 회피를 위해 Content-Type을 text/plain 사용
-                    const res = await fetch(WAITLIST_ENDPOINT, {
-  method: 'POST',
-  headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // simple 요청 유지
-  body: JSON.stringify(payload),
-  mode: 'no-cors' // 배포 후에도 고정
-});
-
-                    // 응답 파싱 시도(읽기 실패해도 사용자 경험상 OK 처리)
-                    let okResp = true; // no-cors면 응답이 opaque라 읽지 않음
-try {
-  if (res && res.type !== 'opaque') {
-    const json = await res.json();
-    okResp = !!json.ok;
-  }
-} catch(_) {}
-
-                    if (feedback) feedback.textContent = okResp
-                        ? '신청이 완료되었습니다. 출시 시 가장 먼저 알려드리겠습니다.'
-                        : '잠시 후 다시 시도해 주세요.';
-                    form.reset();
-                } catch (_) {
-                    if (feedback) feedback.textContent = '네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
-                }
-            });
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = (input.value || '').trim();
+        const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!ok){
+          if (feedback) feedback.textContent = '올바른 이메일 주소를 입력해 주세요.';
+          input.focus(); return;
         }
 
-        handleSignup('signup', 'signup-email', 'signup-feedback', 'hero');
-        handleSignup('signup-cta', 'signup-email-cta', 'signup-feedback-cta', 'cta');
-
-
-        // 스크롤 시 헤더 표시/숨김
-        let lastScrollTop = 0;
-        const header = document.querySelector('header');
-        window.addEventListener('scroll', () => {
-            let st = window.pageYOffset || document.documentElement.scrollTop;
-            header.style.transform = (st > lastScrollTop && st > 100) ? 'translateY(-100%)' : 'translateY(0)';
-            lastScrollTop = st;
+        const params = new URLSearchParams({
+          email,
+          source: sourceLabel || 'web',
+          ua: navigator.userAgent || '',
+          page: location.href
         });
 
-        // 관찰 애니메이션
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        try {
+          await fetch(WAITLIST_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+            body: params.toString(),
+            mode: 'no-cors' // 응답 본문은 읽지 않지만 서버에는 도달
+          });
+          if (feedback) feedback.textContent = '신청이 완료되었습니다. 출시 시 가장 먼저 알려드리겠습니다.';
+          form.reset();
+        } catch {
+          if (feedback) feedback.textContent = '네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+        }
+      });
+    }
+    handleSignup('signup', 'signup-email', 'signup-feedback', 'hero');
+    handleSignup('signup-cta', 'signup-email-cta', 'signup-feedback-cta', 'cta');
 
-        document.querySelectorAll('.benefit-card,.step-card,.pricing-card,.testimonial-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-    </script>
+    /* ====== 헤더 표시/숨김 ====== */
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      let st = window.pageYOffset || document.documentElement.scrollTop;
+      header.style.transform = (st > lastScrollTop && st > 100) ? 'translateY(-100%)' : 'translateY(0)';
+      lastScrollTop = st;
+    });
+
+    /* ====== 섹션 진입 애니메이션 ====== */
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.style.opacity='1';
+          entry.target.style.transform='translateY(0)';
+        }
+      });
+    },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+
+    document.querySelectorAll('.benefit-card,.step-card,.pricing-card,.testimonial-card').forEach(card=>{
+      card.style.opacity='0';
+      card.style.transform='translateY(30px)';
+      card.style.transition='opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(card);
+    });
+  </script>
 </body>
-
-
 </html>
-
-
