@@ -27,12 +27,11 @@
     .cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(102,126,234,0.3)}
 
     /* Hero */
-    .hero{padding:120px 0 80px;text-align:center;color:white;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:url('image.jpg') center/cover no-repeat;position:relative}
-    .hero::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:1}
+    .hero{padding:120px 0 80px;text-align:center;color:white;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);position:relative}
     .hero .container{position:relative;z-index:2}
-    .hero h1{font-size:3.5rem;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
-    .hero-subtitle{font-size:1.3rem;margin-bottom:1rem;opacity:0.9;max-width:680px;margin-left:auto;margin-right:auto}
-    .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+    .hero h1{font-size:3.5rem;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,0.3);line-height:1.2}
+    .hero-subtitle{font-size:1.3rem;margin-bottom:2rem;opacity:0.95;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.5}
+    .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
     .btn-primary{background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);color:white;border:2px solid rgba(255,255,255,0.3);padding:15px 30px;border-radius:30px;font-size:1.1rem;font-weight:bold;text-decoration:none;transition:all 0.3s}
     .btn-secondary{background:white;color:#667eea;border:2px solid white;padding:15px 30px;border-radius:30px;font-size:1.1rem;font-weight:bold;text-decoration:none;transition:all 0.3s}
     .btn-primary:hover,.btn-secondary:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(0,0,0,0.2)}
@@ -121,56 +120,62 @@
       /* Header 모바일 */
       .nav-links{display:none}
       .mobile-menu-btn{display:block}
-      .cta-btn{padding:10px 20px;font-size:0.9rem}
+      .cta-btn{padding:8px 16px;font-size:0.85rem;border-radius:20px}
       
       /* Hero 모바일 */
       .hero{padding:100px 0 60px;min-height:auto}
-      .hero h1{font-size:2.5rem;line-height:1.2}
-      .hero-subtitle{font-size:1.1rem;padding:0 10px}
+      .hero h1{font-size:2.2rem;line-height:1.3;margin-bottom:1.5rem;word-break:keep-all}
+      .hero-subtitle{font-size:1rem;padding:0 10px;margin-bottom:2rem;line-height:1.6}
       .hero-subtitle br{display:none}
-      .hero-cta{flex-direction:column;align-items:center;gap:0.75rem}
-      .btn-primary, .btn-secondary{padding:12px 24px;font-size:1rem}
+      .hero-cta{flex-direction:column;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
+      .btn-primary, .btn-secondary{padding:12px 24px;font-size:0.95rem;width:200px;text-align:center}
       
       /* Partners 모바일 */
       .partners{padding:40px 0}
-      .partners h3{font-size:1rem;padding:0 10px}
+      .partners h3{font-size:0.95rem;padding:0 10px;line-height:1.5}
       .partner-logos{gap:1.5rem}
-      .partner-logo{width:50px;height:50px;font-size:1.2rem}
+      .partner-logo{width:45px;height:45px;font-size:1.1rem}
       
       /* Benefits 모바일 */
       .benefits{padding:60px 0}
-      .section-title{font-size:2rem;margin-bottom:2rem}
+      .section-title{font-size:1.8rem;margin-bottom:2rem;line-height:1.3;word-break:keep-all}
       .benefits-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
       .benefit-card{padding:1.5rem}
+      .benefit-card h3{font-size:1.1rem;margin-bottom:0.75rem}
+      .benefit-card p{font-size:0.9rem;line-height:1.5}
       .benefit-icon{width:50px;height:50px;font-size:1.3rem}
       
       /* How it works 모바일 */
       .how-it-works{padding:60px 0}
       .steps-grid{flex-direction:column;gap:1.5rem;margin-top:2rem}
       .step-card{padding:1.5rem;min-width:auto}
+      .step-card h3{font-size:1.1rem;margin-bottom:0.75rem}
+      .step-card p{font-size:0.9rem;line-height:1.5}
       
       /* Pricing 모바일 */
       .pricing{padding:60px 0}
       .pricing-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
       .pricing-card{padding:1.5rem}
       .pricing-card.featured{transform:none;border-width:2px}
+      .pricing-card h3{font-size:1.2rem}
       .price{font-size:2rem}
+      .feature-list{font-size:0.9rem}
       
       /* FAQ 모바일 */
       .faq{padding:60px 0}
-      .faq-question{padding:1rem;font-size:1rem}
-      .faq-answer{padding:0 1rem 1rem}
+      .faq-question{padding:1.25rem;font-size:0.95rem}
+      .faq-answer{padding:0 1.25rem 1.25rem;font-size:0.9rem;line-height:1.5}
       
       /* CTA Section 모바일 */
       .cta-section{padding:60px 0}
-      .cta-section h2{font-size:2rem}
-      .cta-section p{font-size:1.1rem;padding:0 10px}
+      .cta-section h2{font-size:1.8rem;line-height:1.3;word-break:keep-all}
+      .cta-section p{font-size:1rem;padding:0 10px;line-height:1.5}
       
       /* Signup form 모바일 */
-      .signup-form{flex-direction:column;align-items:center;max-width:300px}
-      .signup-form input[type="email"]{min-width:100%;max-width:100%;margin-bottom:0.5rem}
-      .signup-form button{width:100%}
-      .signup-copy{font-size:0.9rem;padding:0 10px}
+      .signup-form{flex-direction:column;align-items:center;max-width:280px}
+      .signup-form input[type="email"]{min-width:100%;max-width:100%;margin-bottom:0.75rem;font-size:16px;padding:14px}
+      .signup-form button{width:100%;font-size:0.95rem;padding:14px}
+      .signup-copy{font-size:0.9rem;padding:0 15px;margin-bottom:1rem}
       
       /* Footer 모바일 */
       footer{padding:30px 0}
@@ -180,17 +185,27 @@
     @media (max-width: 480px) {
       .container{padding:0 10px}
       
-      .hero h1{font-size:2.2rem}
-      .hero-subtitle{font-size:1rem}
-      .section-title{font-size:1.8rem}
+      .hero h1{font-size:1.9rem;line-height:1.3}
+      .hero-subtitle{font-size:0.9rem;line-height:1.6}
+      .section-title{font-size:1.6rem;line-height:1.3}
       
       .benefit-card, .step-card, .pricing-card{padding:1.25rem}
+      .benefit-card h3, .step-card h3{font-size:1rem}
+      .benefit-card p, .step-card p{font-size:0.85rem}
       
-      .faq-question{font-size:0.95rem}
-      .cta-section h2{font-size:1.8rem}
-      .cta-section p{font-size:1rem}
+      .faq-question{font-size:0.9rem;padding:1rem}
+      .faq-answer{font-size:0.85rem}
+      .cta-section h2{font-size:1.6rem}
+      .cta-section p{font-size:0.9rem}
       
-      .price{font-size:1.8rem}
+      .price{font-size:1.7rem}
+      .feature-list{font-size:0.85rem}
+      
+      .signup-form{max-width:260px}
+      .signup-copy{font-size:0.85rem}
+      
+      .btn-primary, .btn-secondary{width:180px;font-size:0.9rem;padding:12px 20px}
+      .cta-btn{font-size:0.8rem;padding:7px 14px}
     }
 
     /* 가로모드 모바일 최적화 */
