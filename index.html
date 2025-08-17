@@ -806,7 +806,7 @@
 
     <script>
         // FAQ 토글
-        const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbws5qPLAMDtYUI0x_WlCNzINEkdBmdZ44dxmtTp1c0Jqv0sjcWyxDqmNX3l5ZTy2SMaXA/exec';
+        const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbws5qPLAMDtYUI0x_WlCNzINEkdBmdZ44dxmtTp1c0Jqv0sjcWyxDqmNX3l5ZTy2SMaXA/exec';
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
@@ -886,11 +886,13 @@
 });
 
                     // 응답 파싱 시도(읽기 실패해도 사용자 경험상 OK 처리)
-                    let okResp = true;
-                    try {
-                        const json = await res.json();
-                        okResp = !!json.ok;
-                    } catch (_) { }
+                    let okResp = true; // no-cors면 응답이 opaque라 읽지 않음
+try {
+  if (res && res.type !== 'opaque') {
+    const json = await res.json();
+    okResp = !!json.ok;
+  }
+} catch(_) {}
 
                     if (feedback) feedback.textContent = okResp
                         ? '신청이 완료되었습니다. 출시 시 가장 먼저 알려드리겠습니다.'
@@ -936,3 +938,4 @@
 
 
 </html>
+
