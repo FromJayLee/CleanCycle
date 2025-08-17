@@ -10,12 +10,19 @@
     .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
     /* Header */
-    header{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.1)}
+    header{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.1);transition:transform 0.3s ease}
     nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
     .logo{font-size:1.8rem;font-weight:bold;color:#667eea}
     .nav-links{display:flex;list-style:none;gap:2rem}
     .nav-links a{text-decoration:none;color:#333;font-weight:500;transition:color 0.3s}
     .nav-links a:hover{color:#667eea}
+    
+    /* 모바일 햄버거 메뉴 */
+    .mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;color:#333;cursor:pointer;padding:5px}
+    .nav-links.mobile{position:absolute;top:100%;left:0;right:0;background:white;flex-direction:column;gap:0;padding:1rem 0;box-shadow:0 2px 10px rgba(0,0,0,0.1);transform:translateY(-20px);opacity:0;visibility:hidden;transition:all 0.3s ease}
+    .nav-links.mobile.active{transform:translateY(0);opacity:1;visibility:visible}
+    .nav-links.mobile a{padding:0.75rem 1.5rem;border-bottom:1px solid #f0f0f0;display:block}
+
     .cta-btn{background:linear-gradient(45deg,#667eea,#764ba2);color:white;padding:12px 24px;border:none;border-radius:25px;font-weight:bold;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;display:inline-block}
     .cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(102,126,234,0.3)}
 
@@ -39,7 +46,7 @@
     /* Benefits */
     .benefits{background:#f8f9fa;padding:80px 0}
     .section-title{text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#333}
-    .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem}
+    .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem}
     .benefit-card{background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1);text-align:center;transition:transform 0.3s}
     .benefit-card:hover{transform:translateY(-5px)}
     .benefit-icon{width:60px;height:60px;background:linear-gradient(45deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:white;font-size:1.5rem}
@@ -47,15 +54,15 @@
     /* How */
     .how-it-works{padding:80px 0;background:white}
     .steps-grid{display:flex;justify-content:space-around;gap:2rem;margin-top:3rem;flex-wrap:wrap}
-    .step-card{text-align:center;padding:2rem}
+    .step-card{text-align:center;padding:2rem;flex:1;min-width:250px}
     .step-number{width:50px;height:50px;background:#667eea;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-weight:bold;font-size:1.2rem}
 
     /* Pricing */
     .pricing{background:#f8f9fa;padding:80px 0}
-    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem;max-width:1000px;margin-left:auto;margin-right:auto}
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem;max-width:1000px;margin-left:auto;margin-right:auto}
     .pricing-card{background:white;border-radius:15px;padding:2rem;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,0.1);position:relative;transition:transform 0.3s}
     .pricing-card:hover{transform:translateY(-5px)}
-    .pricing-card.featured{border:3px solid #667eea;transform:scale(1.05)}
+    .pricing-card.featured{border:3px solid #667eea}
     .pricing-card.featured::before{content:"유료";position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#667eea;color:white;padding:5px 20px;border-radius:15px;font-size:0.9rem;font-weight:bold}
     .price{font-size:2.5rem;font-weight:bold;color:#667eea;margin:1rem 0}
     .price-period{color:#666;font-size:1rem}
@@ -84,8 +91,8 @@
     /* Signup forms */
     .signup-copy{margin:0.25rem auto 0.75rem;opacity:0.9}
     .signup-form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin:0.25rem auto 1.25rem}
-    .signup-form input[type="email"]{padding:12px 14px;border:1px solid #ddd;border-radius:10px;min-width:240px;max-width:360px;outline:none}
-    .signup-form button{padding:12px 20px;border-radius:10px;border:none;cursor:pointer}
+    .signup-form input[type="email"]{padding:12px 14px;border:1px solid #ddd;border-radius:10px;min-width:240px;max-width:360px;outline:none;flex:1}
+    .signup-form button{padding:12px 20px;border-radius:10px;border:none;cursor:pointer;white-space:nowrap}
     .signup-form--hero input[type="email"]{background:#fff;border:1px solid rgba(255,255,255,0.6)}
     .signup-form--hero button{background:#fff;color:#667eea;font-weight:bold}
     .signup-form--cta input[type="email"]{background:#fff}
@@ -96,11 +103,102 @@
     /* Fixed header anchor offset */
     #features,#how-it-works,#pricing,#faq,#cta,#signup{scroll-margin-top:90px}
 
+    /* 태블릿 반응형 */
+    @media (max-width: 1024px) {
+      .container{padding:0 15px}
+      .hero h1{font-size:3rem}
+      .section-title{font-size:2.2rem}
+      .partner-logos{gap:2rem}
+      .benefits-grid{gap:1.5rem}
+      .steps-grid{gap:1.5rem}
+      .pricing-grid{gap:1.5rem}
+    }
+
+    /* 모바일 반응형 */
     @media (max-width:768px){
+      .container{padding:0 15px}
+      
+      /* Header 모바일 */
       .nav-links{display:none}
-      .hero h1{font-size:2.5rem}
-      .hero-cta{flex-direction:column;align-items:center}
-      .section-title{font-size:2rem}
+      .mobile-menu-btn{display:block}
+      .cta-btn{padding:10px 20px;font-size:0.9rem}
+      
+      /* Hero 모바일 */
+      .hero{padding:100px 0 60px;min-height:auto}
+      .hero h1{font-size:2.5rem;line-height:1.2}
+      .hero-subtitle{font-size:1.1rem;padding:0 10px}
+      .hero-subtitle br{display:none}
+      .hero-cta{flex-direction:column;align-items:center;gap:0.75rem}
+      .btn-primary, .btn-secondary{padding:12px 24px;font-size:1rem}
+      
+      /* Partners 모바일 */
+      .partners{padding:40px 0}
+      .partners h3{font-size:1rem;padding:0 10px}
+      .partner-logos{gap:1.5rem}
+      .partner-logo{width:50px;height:50px;font-size:1.2rem}
+      
+      /* Benefits 모바일 */
+      .benefits{padding:60px 0}
+      .section-title{font-size:2rem;margin-bottom:2rem}
+      .benefits-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
+      .benefit-card{padding:1.5rem}
+      .benefit-icon{width:50px;height:50px;font-size:1.3rem}
+      
+      /* How it works 모바일 */
+      .how-it-works{padding:60px 0}
+      .steps-grid{flex-direction:column;gap:1.5rem;margin-top:2rem}
+      .step-card{padding:1.5rem;min-width:auto}
+      
+      /* Pricing 모바일 */
+      .pricing{padding:60px 0}
+      .pricing-grid{grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
+      .pricing-card{padding:1.5rem}
+      .pricing-card.featured{transform:none;border-width:2px}
+      .price{font-size:2rem}
+      
+      /* FAQ 모바일 */
+      .faq{padding:60px 0}
+      .faq-question{padding:1rem;font-size:1rem}
+      .faq-answer{padding:0 1rem 1rem}
+      
+      /* CTA Section 모바일 */
+      .cta-section{padding:60px 0}
+      .cta-section h2{font-size:2rem}
+      .cta-section p{font-size:1.1rem;padding:0 10px}
+      
+      /* Signup form 모바일 */
+      .signup-form{flex-direction:column;align-items:center;max-width:300px}
+      .signup-form input[type="email"]{min-width:100%;max-width:100%;margin-bottom:0.5rem}
+      .signup-form button{width:100%}
+      .signup-copy{font-size:0.9rem;padding:0 10px}
+      
+      /* Footer 모바일 */
+      footer{padding:30px 0}
+    }
+
+    /* 작은 모바일 */
+    @media (max-width: 480px) {
+      .container{padding:0 10px}
+      
+      .hero h1{font-size:2.2rem}
+      .hero-subtitle{font-size:1rem}
+      .section-title{font-size:1.8rem}
+      
+      .benefit-card, .step-card, .pricing-card{padding:1.25rem}
+      
+      .faq-question{font-size:0.95rem}
+      .cta-section h2{font-size:1.8rem}
+      .cta-section p{font-size:1rem}
+      
+      .price{font-size:1.8rem}
+    }
+
+    /* 가로모드 모바일 최적화 */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .hero{min-height:auto;padding:80px 0 50px}
+      .hero h1{font-size:2.2rem}
+      .section-title{font-size:1.8rem}
+      .benefits, .how-it-works, .pricing, .faq, .cta-section{padding:50px 0}
     }
   </style>
 </head>
@@ -109,12 +207,13 @@
   <header>
     <nav class="container">
       <div class="logo">CleanCycle</div>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="#features">기능</a></li>
         <li><a href="#how-it-works">사용법</a></li>
         <li><a href="#pricing">요금제</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="메뉴">☰</button>
       <a href="#signup" class="cta-btn" data-scroll-signup="true">무료 체험</a>
     </nav>
   </header>
@@ -294,6 +393,29 @@
    /* ====== 대기자 엔드포인트 ====== */
 const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwxU-D33rF5-m27Tq0oGdLOWy8i_rz_V1bEgwNzUuZYtGjnWUeJwydumJI7QzaB5z5cUA/exec';
 
+    /* ====== 모바일 메뉴 토글 ====== */
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('mobile');
+      navLinks.classList.toggle('active');
+    });
+
+    // 메뉴 링크 클릭시 모바일 메뉴 닫기
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('mobile', 'active');
+      });
+    });
+
+    // 화면 크기 변경시 모바일 메뉴 상태 리셋
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        navLinks.classList.remove('mobile', 'active');
+      }
+    });
+
     /* ====== FAQ 토글 ====== */
     document.querySelectorAll('.faq-question').forEach(button => {
       button.addEventListener('click', () => {
@@ -395,7 +517,3 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwxU-D33rF5-m
   </script>
 </body>
 </html>
-
-
-
-
