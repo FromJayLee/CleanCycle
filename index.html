@@ -538,6 +538,7 @@ src="https://www.facebook.com/tr?id=626334090540630&ev=PageView&noscript=1"
             mode: 'no-cors' // 응답 본문은 읽지 않지만 서버에는 도달
           });
           if (feedback) feedback.textContent = '신청이 완료되었습니다. 출시 시 가장 먼저 알려드리겠습니다.';
+          fbq('track', 'Lead');
           form.reset();
         } catch {
           if (feedback) feedback.textContent = '네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
@@ -577,6 +578,7 @@ src="https://www.facebook.com/tr?id=626334090540630&ev=PageView&noscript=1"
   </script>
 </body>
 </html>
+
 
 
 
